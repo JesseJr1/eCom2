@@ -7,11 +7,11 @@
 
     <ul>
         {% for category in categories %}
-            <li><input type="checkbox"<a href="{{ path('app_category', { id: category.id }) }}">{{ category.title }}</a></li>
+            <li><a href="{{ path('app_category', { id: category.id }) }}">{{ category.title }}</a></li>
         {% endfor %}
     </ul>
 
-        {% for product in product  %}
+        {# {% for product in product  %}
             <img src="téléchargement.jpg">
-            {% endfor %}
+            {% endfor %} #}
 {% endblock %}  

@@ -13,6 +13,7 @@ class CategoryController extends AbstractController
     //category -> categories
     public function list(CategoryRepository $categoryRepository): Response
     {
+        // Affiche toute les catégories présente dans la bdd EX : laptop, headphone, etc...
         return $this->render('category/list.html.twig', [
             'categories' => $categoryRepository->findAll(),
         ]);
@@ -21,6 +22,7 @@ class CategoryController extends AbstractController
     #[Route('/categories/{id}', name: 'app_category')]
     public function show(CategoryRepository $categoryRepository, string $id): Response
     {
+        // Affiche la catégorie correspondant à l'id passé en paramètre
         return $this->render('category/show.html.twig', [
             'category' => $categoryRepository->find($id),
         ]);
