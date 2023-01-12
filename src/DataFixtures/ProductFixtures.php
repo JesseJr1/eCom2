@@ -15,6 +15,17 @@ class ProductFixtures extends Fixture
         $tabletLaptop->setPrice(299.99);
         $manager->persist($tabletLaptop);
 
+        $headphone = new Product();
+        $headphone->setName('Wireless headphone');
+        $headphone->setPrice(76.99);
+        $manager->persist($headphone);
+
+        $consoleController = new Product();
+        $consoleController->setName('Play game');
+        $consoleController->setPrice(70);
+        $manager->persist($consoleController);
+        
+
         $manager->flush();
     }
 }

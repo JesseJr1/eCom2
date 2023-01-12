@@ -23,8 +23,9 @@ class CategoryFixtures extends Fixture
         $console->setTitle('Console');
         $manager->persist($console);
 
-
-
+        $headphone = new Category();
+        $headphone->setTitle('Headphone');
+        $manager->persist($headphone);
 
 
         $manager->flush();
