@@ -19,7 +19,7 @@ class ProductPictures
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $path = null;
 
-    #[ORM\ManyToOne(inversedBy: 'productImages')]
+    #[ORM\ManyToOne(inversedBy: 'productPictures')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Product $product = null;
 
