@@ -30,7 +30,7 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'product')]
     private ?Category $category = null;
 
-    #[ORM\OneToMany(mappedBy: 'productPictures', targetEntity: ProductPictures::class)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductPictures::class)]
     private Collection $productPictures;
 
     public function __construct()
