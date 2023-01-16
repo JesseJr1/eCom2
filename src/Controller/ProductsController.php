@@ -9,13 +9,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductsController extends AbstractController
 {
-    // #[Route('/products', name: 'app_products')]
-    // public function list(ProductRepository $productRepository): Response
-    // {
-    //     return $this->render('products/product.html.twig', [
-    //         'products' => $productRepository->findAll(),
-    //     ]);
-    // }
+    #[Route('/products', name: 'app_products')]
+    public function list(ProductRepository $productRepository): Response
+    {
+        return $this->render('products/product.html.twig', [
+            'products' => $productRepository->findAll(),
+        ]);
+    }
 
     #[Route('/product/{id}', name: 'app_products')]
     public function show(ProductRepository $productRepository, string $id): Response

@@ -12,7 +12,7 @@ class ProductPicturesFixtures extends Fixture implements DependentFixtureInterfa
     public function load(ObjectManager $manager): void
     {
         $productPictures = new ProductPictures();
-        $productPictures->setPath('téléchargement.jpg');
+        $productPictures->setPath('laptop.jpg');
         $productPictures->setPosition(1);
         $productPictures->setProduct($this->getReference(ProductFixtures::PRODUCT_CONSOLE));
         $manager->persist($productPictures);

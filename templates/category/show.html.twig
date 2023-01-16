@@ -1,21 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	eCom2 | Donkey Code & Symfony
-	{{ category.title }}
-{% endblock %}
+	eCom2 | Donkey Code & Symfony {{ category.title }}{% endblock %}
 
 {% block body %}
 	<h1>{{ category.title }}</h1>
 
-
-	<p>{{ category| raw }}</p>
-
-	{% for product in category.product %}
+	<p>{{ category | raw }}</p>
+	
+	{% for product in category.products %}
 		<div>
 			<h2>{{ product.name }}</h2>
 			{% if product.productPictures | length > 0 %}
-				<img src="{{ asset('productpictures/' ~ product.productPictures[0].path) }}" width="100"/>
+				<img src="{{ asset('product-pictures/' ~ product.productPictures[0].path) }}" width="100"/>
 			{% endif %}
 			<span>{{ product.price | format_currency('EUR', locale='fr') }}</span>
 		</div>
