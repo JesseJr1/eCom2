@@ -10,9 +10,6 @@ class ProductPictures
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-
-
-
     #[ORM\Column]
     private ?int $id = null;
 
@@ -25,9 +22,6 @@ class ProductPictures
 
     #[ORM\Column(nullable: true)]
     private ?int $position = null;
-
-    #[ORM\ManyToOne(inversedBy: 'productPictures')]
-    private ?Product $productPictures = null;
 
     public function getId(): ?int
     {
@@ -66,18 +60,6 @@ class ProductPictures
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
-
-        return $this;
-    }
-
-    public function getProductPictures(): ?Product
-    {
-        return $this->productPictures;
-    }
-
-    public function setProductPictures(?Product $productPictures): self
-    {
-        $this->productPictures = $productPictures;
 
         return $this;
     }
