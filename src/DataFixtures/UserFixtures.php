@@ -15,7 +15,8 @@ class UserFixtures extends Fixture
         $user->setFirstname('Halim');
         $user->setLastname('Tobias');
         $user->setRoles(['ROLE_ADMIN']);
-        $user->setPassword('$2y$13$8yoezPi9FtWJb1JoOVu6nudf4yhyb44bfiVW9rTzMrCslwn2Bqwm6');
+        $user->setPassword('demo');
+        // $user->setPassword('$2y$13$8yoezPi9FtWJb1JoOVu6nudf4yhyb44bfiVW9rTzMrCslwn2Bqwm6');
 
 
 
