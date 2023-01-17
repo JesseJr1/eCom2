@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -99,25 +98,25 @@ class Product
         return $this->productPictures;
     }
 
-    public function addProductPicture(ProductPictures $productPicture): self
-    {
-        if (!$this->productPictures->contains($productPicture)) {
-            $this->productPictures->add($productPicture);
-            $productPicture->setProductPictures($this);
-        }
+    // public function addProductPicture(ProductPictures $productPicture): self
+    // {
+    //     if (!$this->productPictures->contains($productPicture)) {
+    //         $this->productPictures->add($productPicture);
+    //         $productPicture->setProductPictures($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeProductPicture(ProductPictures $productPicture): self
-    {
-        if ($this->productPictures->removeElement($productPicture)) {
-            // set the owning side to null (unless already changed)
-            if ($productPicture->getProductPictures() === $this) {
-                $productPicture->setProductPictures(null);
-            }
-        }
+    // public function removeProductPicture(ProductPictures $productPicture): self
+    // {
+    //     if ($this->productPictures->removeElement($productPicture)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($productPicture->getProductPictures() === $this) {
+    //             $productPicture->setProductPictures(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+        // return $this;
+    // }
 }
