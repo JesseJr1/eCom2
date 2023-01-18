@@ -1,0 +1,9 @@
+{# {% set product = entity.instance %}
+
+{% for productPicture in product.productPictures %}
+    <img src="{{ vich_uploader_asset(productPicture, 'pathFile') }}" />
+{% else %}
+	<span class="badge badge-secondary">
+		Empty
+	</span>
+{% endfor %} #}

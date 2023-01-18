@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\ProductPictures;
+use App\Entity\ProductPicture;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ProductPictures>
+ * @extends ServiceEntityRepository<ProductPicture>
  *
- * @method ProductPictures|null find($id, $lockMode = null, $lockVersion = null)
- * @method ProductPictures|null findOneBy(array $criteria, array $orderBy = null)
- * @method ProductPictures[]    findAll()
- * @method ProductPictures[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ProductPicture|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ProductPicture|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ProductPicture[]    findAll()
+ * @method ProductPicture[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProductPicturesRepository extends ServiceEntityRepository
+class ProductPictureRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ProductPictures::class);
+        parent::__construct($registry, ProductPicture::class);
     }
 
-    public function save(ProductPictures $entity, bool $flush = false): void
+    public function save(ProductPicture $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ProductPicturesRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(ProductPictures $entity, bool $flush = false): void
+    public function remove(ProductPicture $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class ProductPicturesRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return ProductPictures[] Returns an array of ProductPictures objects
+//     * @return ProductPicture[] Returns an array of ProductPicture objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class ProductPicturesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?ProductPictures
+//    public function findOneBySomeField($value): ?ProductPicture
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

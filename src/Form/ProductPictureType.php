@@ -2,17 +2,18 @@
 
 namespace App\Form;
 
-use App\Entity\ProductPictures;
+use App\Entity\ProductPicture;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class ProductPicturesType extends AbstractType
+class ProductPictureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('path')
+            ->add('pathFile', VichImageType::class)
             ->add('position')
         ;
     }
@@ -20,7 +21,7 @@ class ProductPicturesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ProductPictures::class,
+            'data_class' => ProductPicture::class,
         ]);
     }
 }
