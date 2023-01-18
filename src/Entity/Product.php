@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
+use Symfony\Component\Form\AbstractType;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[Vich\Uploadable]
@@ -34,18 +34,25 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'product')]
     private ?Category $category = null;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductPictures::class)]
-    private Collection $productPictures;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
     #[Vich\UploadableField(mapping: 'product', fileNameProperty: 'image')]
     private ?File $imageFile = null;
 
+    #[Vich\UploadableField(mapping: 'product', fileNameProperty: 'manual')]
+    private ?File $manualFile = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $manual = null;
+
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductPicture::class)]
+    private Collection $ProductPicture;
+
     public function __construct()
     {
-        $this->productPictures = new ArrayCollection();
+
+        $this->ProductPicture = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,36 +108,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, ProductPictures>
-     */
-    public function getProductPictures(): Collection
-    {
-        return $this->productPictures;
-    }
-
-    // public function addProductPicture(ProductPictures $productPicture): self
-    // {
-    //     if (!$this->productPictures->contains($productPicture)) {
-    //         $this->productPictures->add($productPicture);
-    //         $productPicture->setProductPictures($this);
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function removeProductPicture(ProductPictures $productPicture): self
-    // {
-    //     if ($this->productPictures->removeElement($productPicture)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($productPicture->getProductPictures() === $this) {
-    //             $productPicture->setProductPictures(null);
-    //         }
-    //     }
-
-    // return $this;
-    // }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -158,4 +135,71 @@ class Product
             $this->updatedAt = new \DateTimeImmutable();
         }
     }
+
+    public function getManual(): ?string
+    {
+        return $this->manual;
+    }
+
+    public function setManual(?string $manual): self
+    {
+        $this->manual = $manual;
+
+        return $this;
+    }
+
+    public function getManualFile(): ?string
+    {
+        return $this->manualFile;
+    }
+
+    public function setManualFile(?File $manualFile = null): void
+    {
+        $this->manualFile = $manualFile;
+
+        if (null !== $manualFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    /**
+     * @return Collection<int, ProductPicture>
+     */
+    public function getProductPictures(): Collection
+    {
+        return $this->productPictures;
+    }
+
+    public function addProductPicture(ProductPicture $productPicture): self
+    {
+        if (!$this->productPictures->contains($productPicture)) {
+            $this->productPictures->add($productPicture);
+            $productPicture->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductPicture(ProductPicture $productPicture): self
+    {
+        if ($this->productPictures->removeElement($productPicture)) {
+            // set the owning side to null (unless already changed)
+            if ($productPicture->getProduct() === $this) {
+                $productPicture->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductPicture>
+     */
+    public function getProductPicture(): Collection
+    {
+        return $this->ProductPicture;
+    }
+    
 }
