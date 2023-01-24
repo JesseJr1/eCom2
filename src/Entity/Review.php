@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReviewRepository::class)]
 class Review
@@ -19,10 +20,20 @@ class Review
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
+    #[Assert\Email([
+        'mode' => 'strict',
+    ])]
+    #[Assert\NotBlank()]
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Votre pseudo doit avoir au moins {{ limit }} caracteres',
+        maxMessage: 'Votre pseudo ne doit pas depasser {{ limit }}  caracteres ',
+    )]
     private ?string $nickname = null;
 
     #[ORM\Column]
