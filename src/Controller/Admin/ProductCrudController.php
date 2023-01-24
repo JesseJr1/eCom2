@@ -2,9 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Admin\Field\VichImageField;
+
 use App\Entity\Product;
-use App\Entity\ProductPicture;
+use App\Form\ProductPictureType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -40,7 +40,7 @@ class ProductCrudController extends AbstractCrudController
         yield FormField::addTab('Images');
         yield CollectionField::new('productPicture')
                 ->setTemplatePath('admin/product/pictures.html.twig')
-                ->setEntryType(ProductPicture::class);
+                ->setEntryType(ProductPictureType::class);
     }
     
 }

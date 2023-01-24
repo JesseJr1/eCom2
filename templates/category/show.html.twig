@@ -13,7 +13,7 @@
 			<h2>{{ product.name }}</h2>
 
 
-			{% if product.getProductPictures() | length > 0 %}
+			{% if product.getProductPicture() | length > 0 %}
 				<img src="{{ asset('product-pictures/' ~ product.getProductPicture()[0].path) }}" width="100"/>
 			{% endif %}
 			<span>{{ product.price | format_currency('EUR', locale='fr') }}</span>
