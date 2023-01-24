@@ -28,7 +28,12 @@ class ReviewType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('content')
+            ->add('content', TextType::class,[
+                'label' => 'Votre commentaire',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
             ->add('created_at')
             ->add('product')
             ->add('parent', HiddenType::class, [
