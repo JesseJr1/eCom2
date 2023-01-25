@@ -18,7 +18,7 @@ class ProductsController extends AbstractController
 {
 
     use TimestampableEntity;
-
+    
     #[Route('/products', name: 'app_products')]
     public function list(ProductRepository $productRepository): Response
     {
@@ -27,7 +27,7 @@ class ProductsController extends AbstractController
         ]);
     }
 
-    #[Route('/product/{id}', name: 'app_products')]
+    #[Route('/product/{id}', name: 'app_product/{id}')]
     public function show(ProductRepository $productRepository, string $id, Request $request, EntityManagerInterface $manager): Response
     {
 
@@ -43,12 +43,13 @@ class ProductsController extends AbstractController
             $manager->persist($review);
             $manager->flush();
             $this->addFlash('message', 'Votre com a été envoyé');
-            // return $this->redirectToRoute('app_products');
+            return $this->redirectToRoute('app_products');
 
         }
         return $this->render('products/show.html.twig', [
             'product' => $productRepository->findAll($id),
             'reviewForm' => $reviewForm->createView()
         ]);
+
     }
 }
