@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends AbstractController
 {
+    
     #[Route('/categories', name: 'app_categories')]
     //category -> categories
     public function list(CategoryRepository $categoryRepository): Response

@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	eCom2 | Donkey Code & Symfony {{ category.title }}{% endblock %}
+	eCom2 | Donkey Code & Symfony {{ category }}{% endblock %}
 
 {% block body %}
-	<h1>{{ category.title }}</h1>
+	<h1>{{ category }}</h1>
 
 	<p>{{ category | raw }}</p>
 	
 	{% for product in category.products %}
+		{% include "_parts/card.html.twig" %}
 		<div>
 			<h2>{{ product.name }}</h2>
 
