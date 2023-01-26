@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     errorPath: 'user',
     message: 'Cet utilisateur a déjà noté ce produit.'
 )]
-class Mark
+class Mark 
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

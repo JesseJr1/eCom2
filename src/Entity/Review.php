@@ -8,9 +8,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Traversable;
 
 #[ORM\Entity(repositoryClass: ReviewRepository::class)]
-class Review
+class Review 
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -53,9 +54,13 @@ class Review
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     private Collection $replies;
 
+    #[ORM\OneToMany(mappedBy: 'review', targetEntity: Mark::class)]
+    private Collection $mark;
+
     public function __construct()
     {
         $this->replies = new ArrayCollection();
+        $this->mark = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,6 +164,36 @@ class Review
             // set the owning side to null (unless already changed)
             if ($reply->getParent() === $this) {
                 $reply->setParent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Mark>
+     */
+    public function getMark(): Collection
+    {
+        return $this->mark;
+    }
+
+    public function addMark(Mark $mark): Traversable| self
+    {
+        if (!$this->mark->contains($mark)) {
+            $this->mark->add($mark);
+            $mark->setReview($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMark(Mark $mark): Traversable| self
+    {
+        if ($this->mark->removeElement($mark)) {
+            // set the owning side to null (unless already changed)
+            if ($mark->getReview() === $this) {
+                $mark->setReview(null);
             }
         }
 
