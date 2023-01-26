@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Mark;
 use App\Entity\Review;
+use App\Form\MarkType;
 use App\Form\ReviewType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +21,7 @@ class ProductsController extends AbstractController
 
     use TimestampableEntity;
     
-    #[Route('/products', name: 'app_products')]
+    #[Route('/product', name: 'app_product')]
     public function list(ProductRepository $productRepository): Response
     {
         return $this->render('products/product.html.twig', [
@@ -27,9 +29,18 @@ class ProductsController extends AbstractController
         ]);
     }
 
+###################################################################################
+
     #[Route('/product/{id}', name: 'app_product/{id}')]
     public function show(ProductRepository $productRepository, string $id, Request $request, EntityManagerInterface $manager): Response
     {
+
+        $markform = $this->createForm(MarkType::class);
+        $markform->handleRequest($request);
+        if($markform->isSubmitted() && $markform->isValid()) {
+            dd($markform->getData());
+        }
+        
 
         $product = $productRepository->find($id);
         $review = new Review;
@@ -48,8 +59,10 @@ class ProductsController extends AbstractController
         }
         return $this->render('products/show.html.twig', [
             'product' => $productRepository->findAll($id),
-            'reviewForm' => $reviewForm->createView()
+            'reviewForm' => $reviewForm->createView(),
+            'markForm' => $markform->createView(),
         ]);
 
     }
+
 }

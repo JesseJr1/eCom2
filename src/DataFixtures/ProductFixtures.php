@@ -13,9 +13,9 @@ class ProductFixtures extends Fixture
 
     public const PRODUCT_LAPTOP = 'PRODUCT_LAPTOP';
 
-    public const PRODUCT_HEADPHONE = 'PRODUCT_HEADPHONE';
+    // public const PRODUCT_HEADPHONE = 'PRODUCT_HEADPHONE';
 
-    public const PRODUCT_CONSOLE = 'PRODUCT_CONSOLE';
+    //public const PRODUCT_CONSOLE = 'PRODUCT_CONSOLE';
 
     public function load(ObjectManager $manager): void
     {
@@ -23,21 +23,22 @@ class ProductFixtures extends Fixture
 
         for ($i = 1; $i <= 50; $i++) {
             $product = new Product();
-            $product->setName('Tablet as a laptop');
+            $product->setName('Tablet as a laptop' . $i);
             $product->setCategory($this->getReference(CategoryFixtures::CATEGORY_LAPTOP));
             $product->setPrice(mt_rand(200, 2000));
-            $mark = new Mark();
-            $mark->setMark(mt_rand(1, 5));
+            // $mark = new Mark();
+            // $mark->setMark(mt_rand(1, 5));
             $manager->persist($product);
-            $manager->persist($mark);
+            // $manager->persist($mark);
         }
 
         $products[] = $product;
-        
+
         $this->addReference(self::PRODUCT_LAPTOP, $product);
-        {
-        }
-        
+
+
+
+
         $manager->flush();
     }
 
@@ -47,7 +48,6 @@ class ProductFixtures extends Fixture
             CategoryFixtures::class,
         ];
     }
-
 }
 
 
